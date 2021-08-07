@@ -6,10 +6,13 @@ import { PatientModule } from './patient/patient.module';
 import { VitalSignModule } from './vital-sign/vital-sign.module';
 import { AlertModule } from './alert/alert.module';
 import { AlertCriteriaModule } from './alert-criteria/alert-criteria.module';
-import { AlertCriteriaModule } from './alert-criteria/alert-criteria.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     MongooseConnectorModule,
     PatientModule,
     VitalSignModule,
