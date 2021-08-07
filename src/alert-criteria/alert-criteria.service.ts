@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CreateAlertCriterionDto } from './dto/create-alert-criterion.dto';
@@ -29,6 +29,10 @@ export class AlertCriteriaService {
     return await this.alertCriteriaModel.findById(id);
   }
 
+  async findByVitalType(vitalType: number): Promise<AlertCriteriaDocument[]>{
+    return await this.alertCriteriaModel.find({vitalType});
+  }
+
   async update(id: string, updateAlertCriterionDto: UpdateAlertCriterionDto) {
     let alertCriteria = await this.alertCriteriaModel.findById(id);
     if(!alertCriteria){
@@ -46,5 +50,28 @@ export class AlertCriteriaService {
 
   async remove(id: string) {
     return await this.alertCriteriaModel.deleteOne({_id: id});
+  }
+
+  async checkNeedAlert(type: number, value: number): Promise<AlertCriteriaDocument[]>{
+    let returnArr = [];
+    const acArr = await this.findByVitalType(type);//type값으로 기준들 가져옴.
+    for(let ac of acArr){
+      if(this.isProblem(value, ac))
+        returnArr.push(ac);
+    }
+    return returnArr;
+  }
+
+  isProblem(value: number, ac: AlertCriteriaDocument): boolean{
+    switch(ac.ro){
+      case 0:
+        return value < ac.point
+      case 1:
+        return value <= ac.point
+      case 2:
+        return value > ac.point
+      case 3:
+        return value >= ac.point
+    }
   }
 }

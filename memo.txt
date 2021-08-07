@@ -34,12 +34,15 @@ VitalSign{
 
 Alert{//최소 기능으로 보면 시간관련 요소들 createdAt 만으로 될듯? 
     patientId: ObjectId //환자 식별값
-    acInfo: AlertCriteria
+    acInfo: AlertCriteria[] //예시값 3개만 보면 항상 하나만 걸리지만 alertCriteria를 자유롭게 넣을 수 있으면 여러개 걸릴 수 도 있으니까 배열로.
+    //그리고 AlertCriteria값이 업데이트 되더라도 alert이 발생한건 그 시점의 데이터 기준이므로 아예 서브도큐먼트로 박제함.
+    //*만약에 alertCriteria는 업데이트가 안일어나고 생성/삭제만 된다면 참조용id만 넣어도 되긴함... 하지만 몽고 특성상 그래도 읽기 효율은 서브도큐먼트가 나을듯?
 }
 
 AlertCriteria{//이넘도 생성시에 각 AC간의 관계에서 모순되는 경우가 있나 체크하는 로직이 필요할까 ? > 일단 언급은 없었으니 생략
     vitalType: number // 0 Temp 1 Pulse
     ro: number // relation operator 관계 연산자... 0 < 1 <= 2 > 3 >= ...
+    point: number // 기준점 (관계 연상자 뒤에 들어갈 값.)
 }
 
 *아 지금 생각하니 환자와의 관계 필드가 없음 추가...

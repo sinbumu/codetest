@@ -28,6 +28,10 @@ export class AlertService {
     return await newAlert.save();
   }
 
+  async createWithAlertCriteria(patientId: string, ){
+
+  }
+
   async findAll() {
     return await this.alertModel.find();
   }

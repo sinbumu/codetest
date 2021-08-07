@@ -14,6 +14,9 @@ export class AlertCriteria {
   @Prop({type: mongoose.Schema.Types.Number, required: true, description: "relation operator 관계 연산자... 0 < 1 <= 2 > 3 >= ..."})
   ro: number
 
+  @Prop({type: mongoose.Schema.Types.Number, required: true, description: "기준점 (관계 연상자 뒤에 들어갈 값.)"})
+  point: number
+
   @Prop({type: mongoose.Schema.Types.Date, index:true, required: true, description: "생성일"})
   createdAt: Date;
 
