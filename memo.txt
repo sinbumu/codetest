@@ -18,7 +18,7 @@ Patient , VitalSign , Alert , AlertCriteria 에 대해 각각 모듈을 만들�
 스키마 정의는 대략... 최소 필드만 넣는다 치고.
 
 Common {//모든 스키마에 공통적으로 넣을거
-    _id: ObjectId
+    _id: ObjectId (실제 스크립트에선 문자열로 다루고(클라이언트에 넘길때도), mongoose에서(orm) 디비에 넘길때 알아서 변환하게 설정할 예정.)
     createdAt: Date
     updatedAt: Date
 }
@@ -29,9 +29,11 @@ Patient {
 VitalSign{
     type: number // 0 Temp 1 Pulse
     value: number // 몽고 타입은 double로 잡기로? 퀘스트 선에선 부동소수점때매 연산오류 나면 안되는 정밀성 필요하진 않아 보이니?
+    patientId: ObjectId //환자 식별값
 }
 
 Alert{//최소 기능으로 보면 시간관련 요소들 createdAt 만으로 될듯? 
+    patientId: ObjectId //환자 식별값
     acInfo: AlertCriteria
 }
 
@@ -40,3 +42,4 @@ AlertCriteria{//이넘도 생성시에 각 AC간의 관계에서 모순되는 �
     ro: number // relation operator 관계 연산자... 0 < 1 <= 2 > 3 >= ...
 }
 
+*아 지금 생각하니 환자와의 관계 필드가 없음 추가...
