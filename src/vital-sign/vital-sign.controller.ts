@@ -19,16 +19,16 @@ export class VitalSignController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.vitalSignService.findOne(+id);
+    return this.vitalSignService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateVitalSignDto: UpdateVitalSignDto) {
-    return this.vitalSignService.update(+id, updateVitalSignDto);
+    return this.vitalSignService.update(id, updateVitalSignDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.vitalSignService.remove(+id);
+    return this.vitalSignService.remove(id);
   }
 }

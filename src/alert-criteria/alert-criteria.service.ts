@@ -1,26 +1,50 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateAlertCriterionDto } from './dto/create-alert-criterion.dto';
 import { UpdateAlertCriterionDto } from './dto/update-alert-criterion.dto';
+import { AlertCriteria, AlertCriteriaDocument } from './model/alert-criteria.schema';
 
 @Injectable()
 export class AlertCriteriaService {
-  create(createAlertCriterionDto: CreateAlertCriterionDto) {
-    return 'This action adds a new alertCriterion';
+  constructor(
+    @InjectModel(AlertCriteria.name) private alertCriteriaModel: Model<AlertCriteriaDocument>,
+  ){}
+  
+  async create(createAlertCriterionDto: CreateAlertCriterionDto) {
+    let newAlertCriteria = new this.alertCriteriaModel();
+    let currentDate = new Date();
+    newAlertCriteria.vitalType = createAlertCriterionDto.vitalType;
+    newAlertCriteria.ro = createAlertCriterionDto.ro;
+    newAlertCriteria.createdAt = currentDate;
+    newAlertCriteria.updatedAt = currentDate;
+    return await newAlertCriteria.save();
   }
 
-  findAll() {
-    return `This action returns all alertCriteria`;
+  async findAll() {
+    return await this.alertCriteriaModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} alertCriterion`;
+  async findOne(id: string) {
+    return await this.alertCriteriaModel.findById(id);
   }
 
-  update(id: number, updateAlertCriterionDto: UpdateAlertCriterionDto) {
-    return `This action updates a #${id} alertCriterion`;
+  async update(id: string, updateAlertCriterionDto: UpdateAlertCriterionDto) {
+    let alertCriteria = await this.alertCriteriaModel.findById(id);
+    if(!alertCriteria){
+      throw new NotFoundException('ALERTCRITERIA_NOT_FOUND', 'ALERTCRITERIA_NOT_FOUND');
+    }
+
+    if(updateAlertCriterionDto.vitalType)
+    alertCriteria.vitalType = updateAlertCriterionDto.vitalType;
+    if(updateAlertCriterionDto.ro)
+    alertCriteria.ro = updateAlertCriterionDto.ro;
+    alertCriteria.updatedAt = new Date();
+
+    return await alertCriteria.save();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} alertCriterion`;
+  async remove(id: string) {
+    return await this.alertCriteriaModel.deleteOne({_id: id});
   }
 }

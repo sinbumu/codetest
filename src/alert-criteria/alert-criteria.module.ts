@@ -4,6 +4,7 @@ import { AlertCriteriaController } from './alert-criteria.controller';
 
 @Module({
   controllers: [AlertCriteriaController],
-  providers: [AlertCriteriaService]
+  providers: [AlertCriteriaService],
+  exports: [AlertCriteriaService]
 })
 export class AlertCriteriaModule {}

@@ -8,7 +8,7 @@ export class AlertController {
   constructor(private readonly alertService: AlertService) {}
 
   @Post()
-  create(@Body() createAlertDto: CreateAlertDto) {
+  create(@Body() createAlertDto: CreateAlertDto) {//실제 여기서 만들진 X
     return this.alertService.create(createAlertDto);
   }
 
@@ -19,16 +19,16 @@ export class AlertController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.alertService.findOne(+id);
+    return this.alertService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateAlertDto: UpdateAlertDto) {
-    return this.alertService.update(+id, updateAlertDto);
+    return this.alertService.update(id, updateAlertDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.alertService.remove(+id);
+    return this.alertService.remove(id);
   }
 }

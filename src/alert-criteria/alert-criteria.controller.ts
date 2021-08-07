@@ -19,16 +19,16 @@ export class AlertCriteriaController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.alertCriteriaService.findOne(+id);
+    return this.alertCriteriaService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateAlertCriterionDto: UpdateAlertCriterionDto) {
-    return this.alertCriteriaService.update(+id, updateAlertCriterionDto);
+    return this.alertCriteriaService.update(id, updateAlertCriterionDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.alertCriteriaService.remove(+id);
+    return this.alertCriteriaService.remove(id);
   }
 }
