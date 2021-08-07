@@ -24,15 +24,20 @@ export class PatientService {
     return await this.patientModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} patient`;
+  async findOne(id: string) {
+    return await this.patientModel.findById(id);
   }
 
-  update(id: number, updatePatientDto: UpdatePatientDto) {
-    return `This action updates a #${id} patient`;
+  async update(id: string, updatePatientDto: UpdatePatientDto) {
+    let patient = await this.patientModel.findById(id);
+
+    if(updatePatientDto.name)
+    patient.name = updatePatientDto.name;
+
+    return await patient.save();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} patient`;
+  async remove(id: string) {
+    return await this.patientModel.deleteOne({_id: id});
   }
 }
