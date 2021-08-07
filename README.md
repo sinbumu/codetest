@@ -1,73 +1,28 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+■ 배경:
+병원 의료 정보 event를 구독하면서 이상 징후를 보이는 환자가 있을 경우 alert를 생성하고 해당 alert이 발생한 환자를 모니터링하기 위한 API Server가 필요합니다.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+■ 용어:
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Patient := 환자
+VitalSign := 활력 징후. type에는 TEMP(체온), PULSE(맥박)이 있으며 각각 다른 시점에 입력됨.
+Alert := 활력 징후 경보, 해당 VitalSign type에 대해서 AlertCriteria를 벗어날 때마다 발생, e. g, 매시에 체온이 측정된다면, 1시와 2시에 체온이 정상범위를 벗어났을 때, 각각 2개의 Alert 생성
+AlertCriteria := Alert을 발생시키는 기준. 현 시점에서 아래 3가지이며 이후에 추가 가능하도록 설계 필요. 모든 환자에 대해서 일괄 적용.
+- TEMP < 34
+- TEMP >= 38
+- PULSE > 140  
 
-## Installation
 
-```bash
-$ npm install
-```
+■ 요구사항:
 
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+API Server
+특정 기간 내 Alert이 발생한 Patient들 조회, 각 Patient는 해당 기간 내 발생한 Alert의 리스트를 가지고 있어야 함
+Patient 생성
+Alert 생성
+AlertCriteria 생성
+VitalSign 생성
+각 API에 대한 test 코드 작성
+DB 종류에 제한은 없으며, 타당한 이유가 있을 시 여러 DB를 사용해도 됨.
+RESTful API, GraphQL 중 하나로 구현
+orm 혹은 repository pattern 혹은 query/command pattern 사용
