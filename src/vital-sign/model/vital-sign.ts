@@ -5,7 +5,7 @@ export type VitalSignDocument = VitalSign & mongoose.Document;
 
 @Schema()
 export class VitalSign {
-  @Prop({type: mongoose.Schema.Types.ObjectId, index:true, auto:true, required: true, description: "식별자"})
+  @Prop({type: mongoose.Schema.Types.ObjectId, auto:true, required: true, description: "식별자"})
   _id: string;
 
   @Prop({type: mongoose.Schema.Types.ObjectId, index:true, required: true, description: "환자 식별값"})

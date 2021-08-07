@@ -62,4 +62,18 @@ https://github.com/Webeleon/testing-nestjs-with-mongoose-and-mongod-in-memory
 저대로 하니까 안되고 최신버전은 코드 좀 다른듯
 https://nodkz.github.io/mongodb-memory-server/docs/guides/migrate7/#no-function-other-than-start-create-ensureinstance-will-be-starting-anything
 
+아오.... Unsupported Architecture-Platform combination: arch: "ia32", platform: "windows"
+
+inmemory 몽고 디비가 저리 뜨면서 지원 안된다고 튕김.....
+
+맥북으로 하면 될거 같은데 집컴으론 어려울듯...
+그냥 테스트용 inmemory 는 안써야 겠다 저부분 하나 때문에 너무 늘어지고 
+
+
+어차피 이 테스트용 atlas 임시 db 만들어놨으니 걍 거기 연결해야 겠다. 윈도우에서 하니까 평소 안나던 이슈도 나오네
+
+atlas 클라우드에 연결하는건 잘됨.
+
+
+
 
