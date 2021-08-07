@@ -55,5 +55,11 @@ Alert 의 경우는 VitalSign 데이터가 생성되는 시점에만 만들어 �
 
 
 
+기본 crud 양식 api들 추가했으니 이제 테스트 코드좀 작성 하면 좋을듯...
+https://github.com/Webeleon/testing-nestjs-with-mongoose-and-mongod-in-memory
+이 코드 참고해서 테스트 모듈들은 인메모리 몽고에 연결되게 하면 괜찮을거 같음
+
+저대로 하니까 안되고 최신버전은 코드 좀 다른듯
+https://nodkz.github.io/mongodb-memory-server/docs/guides/migrate7/#no-function-other-than-start-create-ensureinstance-will-be-starting-anything
 
 

@@ -4,6 +4,7 @@ import { VitalSignController } from './vital-sign.controller';
 
 @Module({
   controllers: [VitalSignController],
-  providers: [VitalSignService]
+  providers: [VitalSignService],
+  exports:[VitalSignService]
 })
 export class VitalSignModule {}

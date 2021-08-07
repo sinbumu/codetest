@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { AlertCriteriaService } from 'src/alert-criteria/alert-criteria.service';
+import { AlertCriteriaService } from '../alert-criteria/alert-criteria.service';
 import { CreateAlertDto } from './dto/create-alert.dto';
 import { UpdateAlertDto } from './dto/update-alert.dto';
 import { Alert, AlertDocument } from './model/alert.schema';
