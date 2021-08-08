@@ -4,6 +4,8 @@ import { rootMongooseTestModule } from '../mongodb-test-inmemory/MongooseTestMod
 import { MongooseAllFeatureModule } from '../mongoose-all-feature/mongoose-all-feature.module';
 import { PatientService } from './patient.service';
 import { ConfigModule } from '@nestjs/config';
+import { AlertModule } from '../alert/alert.module';
+import { forwardRef } from '@nestjs/common';
 
 jest.setTimeout(60000)
 describe('PatientService', () => {
@@ -16,7 +18,8 @@ describe('PatientService', () => {
         isGlobal: true,
       }),
       MongooseConnectorModule,//몽고디비 커넥터 (전역)
-      MongooseAllFeatureModule
+      MongooseAllFeatureModule,
+      forwardRef(() => AlertModule),
     ],
       providers: [PatientService],
     }).compile();

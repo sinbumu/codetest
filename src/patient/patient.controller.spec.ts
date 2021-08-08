@@ -7,6 +7,8 @@ import { PatientService } from './patient.service';
 import { ConfigModule } from '@nestjs/config';
 import * as request from 'supertest';
 import { async } from 'rxjs';
+import { forwardRef } from '@nestjs/common';
+import { AlertModule } from '../alert/alert.module';
 
 jest.setTimeout(60000)
 describe('PatientController', () => {
@@ -19,7 +21,8 @@ describe('PatientController', () => {
           isGlobal: true,
         }),
         MongooseConnectorModule,//몽고디비 커넥터 (전역)
-        MongooseAllFeatureModule
+        MongooseAllFeatureModule,
+        forwardRef(() => AlertModule),
       ],
       controllers: [PatientController],
       providers: [PatientService],

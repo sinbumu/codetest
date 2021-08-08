@@ -1,8 +1,8 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { VitalSignService } from './vital-sign.service';
 import { VitalSignController } from './vital-sign.controller';
-import { AlertCriteriaModule } from 'src/alert-criteria/alert-criteria.module';
-import { AlertModule } from 'src/alert/alert.module';
+import { AlertCriteriaModule } from '../alert-criteria/alert-criteria.module';
+import { AlertModule } from '../alert/alert.module';
 
 @Module({
   imports:[

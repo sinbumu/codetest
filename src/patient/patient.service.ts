@@ -1,7 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { AlertService } from '../alert/alert.service';
 import { CreatePatientDto } from './dto/create-patient.dto';
+import { PatientWithAlertByDateRangeDTO } from './dto/patientWithAlertByDateRange.dto';
 import { UpdatePatientDto } from './dto/update-patient.dto';
 import { Patient, PatientDocument } from './model/patient.schema';
 
@@ -9,6 +11,7 @@ import { Patient, PatientDocument } from './model/patient.schema';
 export class PatientService {
   constructor(
     @InjectModel(Patient.name) private patientModel: Model<PatientDocument>,
+    private readonly alertService: AlertService,
   ){}
 
   async create(createPatientDto: CreatePatientDto) {
@@ -43,5 +46,9 @@ export class PatientService {
 
   async remove(id: string) {
     return await this.patientModel.deleteOne({_id: id});
+  }
+
+  async findPatientWithAlertByDateRange(dto: PatientWithAlertByDateRangeDTO){
+    return await this.alertService.findPWABDR(dto);
   }
 }

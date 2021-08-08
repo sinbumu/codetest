@@ -27,7 +27,7 @@ Patient {
 }
 
 VitalSign{
-    type: number // 0 Temp 1 Pulse
+    type: number // 1 Temp 2 Pulse
     value: number // 몽고 타입은 double로 잡기로? 퀘스트 선에선 부동소수점때매 연산오류 나면 안되는 정밀성 필요하진 않아 보이니?
     patientId: ObjectId //환자 식별값
 }
@@ -40,7 +40,7 @@ Alert{//최소 기능으로 보면 시간관련 요소들 createdAt 만으로 �
 }
 
 AlertCriteria{//이넘도 생성시에 각 AC간의 관계에서 모순되는 경우가 있나 체크하는 로직이 필요할까 ? > 일단 언급은 없었으니 생략
-    vitalType: number // 0 Temp 1 Pulse
+    vitalType: number // 1 Temp 2 Pulse
     ro: number // relation operator 관계 연산자... 0 < 1 <= 2 > 3 >= ...
     point: number // 기준점 (관계 연상자 뒤에 들어갈 값.)
 }

@@ -11,7 +11,7 @@ export class VitalSign {
   @Prop({type: mongoose.Schema.Types.ObjectId, index:true, required: true, description: "환자 식별값"})
   patientId: string;
 
-  @Prop({type: mongoose.Schema.Types.Number, required: true, description: "타입 - 0 Temp 1 Pulse"})
+  @Prop({type: mongoose.Schema.Types.Number, required: true, description: "타입 - 1 Temp 2 Pulse"})
   type: number
   
   @Prop({type: mongoose.Schema.Types.Number, required: true, description: "해당 타입에 대한 값"})

@@ -1,3 +1,17 @@
+설치, 실행 방법
+
+1. npm i
+2. npm run start
+    or
+    npm run start:dev
+
+    <domain or ip:port>/api  -- swagger page
+    ex : http://localhost:3000/api
+
+
+
+
+
 ■ 배경:
 병원 의료 정보 event를 구독하면서 이상 징후를 보이는 환자가 있을 경우 alert를 생성하고 해당 alert이 발생한 환자를 모니터링하기 위한 API Server가 필요합니다.
 

@@ -1,18 +1,22 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { CreateVitalSignDto } from './create-vital-sign.dto';
 
 export class UpdateVitalSignDto extends PartialType(CreateVitalSignDto) {    
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
-    patientId: string;
+    @ApiProperty({ name: "patientId", required: false, description: "환자 id" })
+    patientId?: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsNumber()
-    type: number
+    @ApiProperty({ name: "type", required: false, description: "타입 - 1 Temp 2 Pulse" })
+    type?: number
   
-    @IsNotEmpty()
+    @IsOptional()
     @IsNumber()
-    value: number
+    @ApiProperty({ name: "value", required: false, description: "해당 타입에 대한 값" })
+    value?: number
 }
 

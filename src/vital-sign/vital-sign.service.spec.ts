@@ -4,6 +4,9 @@ import { rootMongooseTestModule } from '../mongodb-test-inmemory/MongooseTestMod
 import { MongooseAllFeatureModule } from '../mongoose-all-feature/mongoose-all-feature.module';
 import { VitalSignService } from './vital-sign.service';
 import { ConfigModule } from '@nestjs/config';
+import { forwardRef } from '@nestjs/common';
+import { AlertCriteriaModule } from '../alert-criteria/alert-criteria.module';
+import { AlertModule } from '../alert/alert.module';
 
 jest.setTimeout(60000)
 describe('VitalSignService', () => {
@@ -16,7 +19,9 @@ describe('VitalSignService', () => {
           isGlobal: true,
         }),
         MongooseConnectorModule,//몽고디비 커넥터 (전역)
-        MongooseAllFeatureModule
+        MongooseAllFeatureModule,
+        forwardRef(() => AlertCriteriaModule),
+        forwardRef(() => AlertModule),
       ],
       providers: [VitalSignService],
     }).compile();

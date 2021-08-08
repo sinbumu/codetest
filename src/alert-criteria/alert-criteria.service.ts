@@ -16,6 +16,7 @@ export class AlertCriteriaService {
     let currentDate = new Date();
     newAlertCriteria.vitalType = createAlertCriterionDto.vitalType;
     newAlertCriteria.ro = createAlertCriterionDto.ro;
+    newAlertCriteria.point = createAlertCriterionDto.point;
     newAlertCriteria.createdAt = currentDate;
     newAlertCriteria.updatedAt = currentDate;
     return await newAlertCriteria.save();
@@ -43,6 +44,8 @@ export class AlertCriteriaService {
     alertCriteria.vitalType = updateAlertCriterionDto.vitalType;
     if(updateAlertCriterionDto.ro)
     alertCriteria.ro = updateAlertCriterionDto.ro;
+    if(updateAlertCriterionDto.point)
+    alertCriteria.point = updateAlertCriterionDto.point;
     alertCriteria.updatedAt = new Date();
 
     return await alertCriteria.save();
@@ -64,13 +67,13 @@ export class AlertCriteriaService {
 
   isProblem(value: number, ac: AlertCriteriaDocument): boolean{
     switch(ac.ro){
-      case 0:
-        return value < ac.point
       case 1:
-        return value <= ac.point
+        return value < ac.point
       case 2:
-        return value > ac.point
+        return value <= ac.point
       case 3:
+        return value > ac.point
+      case 4:
         return value >= ac.point
     }
   }

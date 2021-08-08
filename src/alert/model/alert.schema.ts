@@ -12,8 +12,8 @@ export class Alert {
   @Prop({type: mongoose.Schema.Types.ObjectId, index:true, required: true, description: "환자 식별값"})
   patientId: string;
   
-  @Prop({type: AlertCriteria, required: true, description: "AlertCriteria(경고 발생기준) 서브 도큐먼트."})
-  acInfo: AlertCriteria
+  @Prop({type: AlertCriteria, required: true, description: "AlertCriteria(경고 발생기준) 서브 도큐먼트 배열"})
+  acInfos: AlertCriteria[]
 
   @Prop({type: mongoose.Schema.Types.Date, index:true, required: true, description: "생성일"})
   createdAt: Date;
