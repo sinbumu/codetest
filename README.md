@@ -2,7 +2,9 @@
 
 1. npm i
 2. npm run start
+ 
     or
+    
     npm run start:dev
 
     <domain or ip:port>/api  -- swagger page
